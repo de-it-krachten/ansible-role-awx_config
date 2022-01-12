@@ -1,0 +1,19 @@
+---
+
+- name: Manage organizations
+  awx.awx.organization:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    name: "{{ organization.name }}"
+    state: "{{ organization.state | default(omit) }}"
+    description: "{{ organization.description | default(omit) }}"
+    galaxy_credentials: "{{ organization.galaxy_credentials | default(omit) }}"
+
+  become: false
+  loop: "{{ awx_organizations }}"
+  loop_control:
+    loop_var: organization
+  when: awx_manage_organizations|bool

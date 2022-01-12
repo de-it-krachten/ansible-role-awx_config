@@ -1,0 +1,30 @@
+---
+
+- name: Manage job templates
+  awx.awx.job_template:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    name:                    "{{ job_template.name }}"
+    description:             "{{ job_template.description | default(job_template.name) }}"
+    project:                 "{{ job_template.project }}"
+    playbook:                "{{ job_template.playbook }}"
+    inventory:               "{{ job_template.inventory }}"
+    credentials:             "{{ job_template.credentials | default(omit) }}"
+    vault_credential:        "{{ job_template.vault_credential | default(omit) }}"
+    job_type:                "{{ job_template.job_type | default('run') }}"
+    verbosity:               "{{ job_template.verbosity | default(omit) }}"
+    concurrent_jobs_enabled: "{{ job_template.concurrent_jobs_enabled | default(omit) }}"
+    limit:                   "{{ job_template.limit | default(omit) }}"
+    survey_enabled:          "{{ job_template.survey_enabled | default(omit) }}"
+    survey_spec:             "{{ job_template.survey_spec | default(omit) }}"
+    ask_limit:               "{{ job_template.ask_limit | default('no') }}"
+    ask_skip_tags:           "{{ job_template.ask_skip_tags | default('no') }}"
+    extra_vars:              "{{ job_template.extra_vars | default({}) }}"
+  become: false
+  loop: "{{ awx_resources['job_templates'] }}"
+  loop_control:
+    loop_var: job_template
+    label: "{{ job_template.name }}"

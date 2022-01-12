@@ -1,0 +1,16 @@
+---
+- name: manage team
+  awx.awx.team:
+    controller_host:       "{{ awx_url }}"
+    controller_username:   "{{ awx_user }}"
+    controller_password:   "{{ awx_pass }}"
+    validate_certs:        "{{ awx_validate_certs }}"
+
+    name: "{{ team.name }}"
+    description: "{{ team.description | default(team.name) }}"
+    organization: "{{ organization.name }}"
+  become: false
+  loop: "{{ awx_resources['teams'] }}"
+  loop_control:
+    loop_var: team
+    label: "{{ team.name }}"

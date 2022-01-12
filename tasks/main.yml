@@ -1,0 +1,22 @@
+---
+
+- name: Configure organizations
+  include_tasks: organization.yml
+
+- name: Combine all variable files
+  set_fact:
+    awx_resources_all: "{{ awx_resources_all|default({}) | combine((lookup('file', item) | from_yaml), recursive=True) }}"
+  with_fileglob: "{{ awx_organization_path }}/*.yml" 
+
+- name: Set-up resources by organization
+  include_tasks: resources.yml
+  loop: "{{ awx_organizations }}"
+  loop_control:
+    loop_var: organization
+  vars:
+    org: "{{ organization.name }}"
+    org_short: "{{ organization.short_name }}"
+    org_file: "{{ awx_organization_path }}/{{ organization.name | lower }}/{{ organization.file }}"
+    key_dir: "{{ awx_organization_path }}/{{ organization.name | lower }}/keys"
+  when:
+    - (organization.state|default('present')) == 'present'

@@ -1,0 +1,78 @@
+---
+
+awx_resources:
+
+  org1:
+
+    inventories:
+      - name: inventory1
+        description: null
+      - name: inventory2
+        description: null
+
+    teams:
+      - name: team1
+      - name: team2
+
+  #  hostgroups:
+    groups:
+      - name: group1
+        inventory: inventory1
+        variables:
+          x: 1
+      - name: group2
+        inventory: inventory1
+        variables:
+          x: 1
+      - name: group2
+        inventory: inventory2
+        variables:
+          x: 3
+
+    hosts:
+      - name: host1
+        inventory: inventory1
+        groups:
+          - group1
+        variables:
+          ansible_host: 192.168.56.201
+      - name: host2
+        inventory: inventory1
+        groups:
+          - group2
+        variables:
+          ansible_host: 192.168.56.202
+
+
+    credentials:
+      - name: credential1
+        description: null
+        credential_type: Machine
+        update_secrets: false
+        inputs:
+          username: vagrant
+          password: vagrant
+          become_method: sudo
+
+    projects:
+      - name: project1
+        scm_type: git
+        scm_url: https://github.com/de-it-krachten/ansible-playbooks-test
+        scm_branch: main
+        #scm_credential: credential1
+
+    job_templates:
+      - name: job_template1
+        project: project1
+        playbook: test.yml
+        inventory: inventory1
+        job_type: run
+        credentials:
+          - credential1
+        extra_vars:
+          ansible_python_interpreter: /usr/bin/python3
+
+    schedules:
+      - name: schedule1
+        unified_job_template: job_template1
+        rrule: "DTSTART;TZID=Europe/Amsterdam:20190101T030000 RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=TH;BYSETPOS=3" 

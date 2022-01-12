@@ -1,0 +1,44 @@
+---
+
+- name: Get all projects present  # noqa no-changed-when
+  command: tower-cli project list --all-pages --format json
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  register: awx_projects
+
+- name: Get all inventories present  # noqa no-changed-when
+  command: tower-cli inventory list --all-pages --format json
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  register: awx_inventories
+
+- name: Get all hosts present  # noqa no-changed-when
+  command: tower-cli host list --all-pages --format json
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  register: awx_hosts
+
+- name: Get all groups present  # noqa no-changed-when
+  command: tower-cli group list --all-pages --format json
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  register: awx_groups
+
+- name: Save projects
+  set_fact:
+    awx_projects:    "{{ awx_projects.stdout|from_json|json_query('results') }}"
+    awx_inventories: "{{ awx_inventories.stdout|from_json|json_query('results') }}"
+    awx_hosts:       "{{ awx_hosts.stdout|from_json|json_query('results') }}"
+    awx_groups:      "{{ awx_groups.stdout|from_json|json_query('results') }}"

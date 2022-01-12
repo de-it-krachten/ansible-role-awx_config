@@ -1,0 +1,45 @@
+---
+
+- name: Define fact awx_resources
+  set_fact:
+    awx_resources: "{{ awx_resources_all['awx_resources'][org_short] }}"
+
+- name: manage inventory for {{ org }}
+  include_tasks: resources/inventory.yml
+  when: awx_manage_inventories|bool and awx_resources['inventories'] is defined
+
+- name: manage users for {{ org }}
+  include_tasks: resources/user.yml
+  when: awx_manage_users|bool and awx_resources['users'] is defined
+
+- name: manage teams for {{ org }}
+  include_tasks: resources/team.yml
+  when: awx_manage_teams|bool and awx_resources['teams'] is defined
+
+- name: manage credentials for {{ org }}
+  include_tasks: resources/credential.yml
+  when: awx_manage_credentials|bool and awx_resources['credentials'] is defined
+
+- name: manage groups for {{ org }}
+  include_tasks: resources/group.yml
+  when: awx_manage_groups|bool and awx_resources['hostgroups'] is defined
+
+- name: manage hosts for {{ org }}
+  include_tasks: resources/host.yml
+  when: awx_manage_hosts|bool and awx_resources['hosts'] is defined
+
+- name: manage projects for {{ org }}
+  include_tasks: resources/project.yml
+  when: awx_manage_projects|bool and awx_resources['projects'] is defined
+
+- name: manage job_templates for {{ org }}
+  include_tasks: resources/job_template.yml
+  when: awx_manage_job_templates|bool and awx_resources['job_templates'] is defined
+
+- name: manage schedules for {{ org }}
+  include_tasks: resources/schedule.yml
+  when: awx_manage_schedules|bool and awx_resources['schedules'] is defined
+
+- name: manage roles for {{ org }}
+  include_tasks: resources/roles.yml
+  when: awx_manage_roles|bool

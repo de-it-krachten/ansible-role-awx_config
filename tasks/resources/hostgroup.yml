@@ -1,0 +1,20 @@
+---
+
+- name: Manage host group membership for {{ hostname }}
+  command: >
+    tower-cli
+    host associate
+    --host "{{ awx_hosts|json_query('[?summary_fields.inventory.name==`' + inventory + '`]|[?name==`' + hostname + '`].id') |join }}"
+    --group "{{ hostgroup }}"
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  become: false
+  loop: "{{ hostgroups }}"
+  loop_control:
+    loop_var: hostgroup
+    label: "{{ hostgroup }}"
+  tags:
+    - skip_ansible_lint

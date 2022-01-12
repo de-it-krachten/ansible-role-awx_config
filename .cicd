@@ -1,0 +1,123 @@
+---
+
+# Generic
+role: ansible-role-awx_config
+role_short: awx_config
+role_description: |
+  AWX configuration (configuration-as-code)
+
+# Supported platform
+platforms:
+  - name: CentOS 7
+    image: centos7
+  - name: CentOS 8
+    image: centos8
+  - name: Debian 10 (Buster)
+    image: debian10
+  - name: Debian 11 (Bullseye)
+    image: debian11
+  - name: Ubuntu 18.04 LTS
+    image: ubuntu1804
+  - name: Ubuntu 20.04 LTS
+    image: ubuntu2004
+
+# Ansible galaxy
+galaxy:
+  role_name: awx_config
+  namespace: de_it_krachten
+  description: awx_config
+  author: Mark van Huijstee
+  company: De IT Krachten BV
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+    - name: Debian
+      versions:
+        - buster
+        - bullseye
+    - name: Ubuntu
+      versions:
+        - 18.04
+        - 20.04
+
+# Github
+github:
+  active: true
+  self_hosted: false
+  fail_fast: true
+  owner: de-it-krachten
+  repo: ansible-role-awx_config
+
+# Gitlab
+gitlab:
+  active: false
+
+# molecule
+molecule:
+  active: true
+  platforms:
+    - centos7
+    - centos8
+    - debian10
+    - debian11
+    - ubuntu1804
+    - ubuntu2004
+  converge:
+    playbooks: []
+    vars:
+      awx_url: https://localhost/api/v2
+      awx_validate_certs: false
+      awx_user: awx
+      awx_pass: awx
+
+      awx_organizations:
+        - name: organization1
+          short_name: org1
+          description: "Company organization nr1"
+          file: org1.yml
+          galaxy_credentials:
+            - Ansible Galaxy
+        - name: organization2
+          short_name: org2
+          description: "Company organization nr2"
+          file: org2.yml
+      awx_organization_path: molecules/default/tests/data
+  prepare:
+    playbooks: []
+    vars: {}
+
+# templates
+ci_templates:
+  - src:  galaxy/templates/meta-main.yml
+    dest: meta/main.yml
+  - src:  yamllint/templates/yamllint
+    dest: .yamllint
+  - src:  github/templates/ci.yml
+    dest: .github/workflows/ci.yml
+    when: github_runner_cloud
+  - src:  github/templates/ci-self-hosted.yml
+    dest: .github/workflows/ci.yml
+    when: github_runner_self_hosted
+  - src:  gitlab/templates/gitlab-ci.yml
+    dest: .gitlab-ci.yml
+    when: gitlab_active
+  - src:  molecule/templates/prepare.yml
+    dest: molecule/default/prepare.yml
+    when: molecule_active
+  - src:  molecule/templates/molecule.yml
+    dest: molecule/default/molecule.yml
+    force: false
+    when: molecule_active
+  - src:  molecule/templates/converge.yml
+    dest: molecule/default/converge.yml
+    when: molecule_active
+#  - src:  molecule/templates/requirements.tmpl
+#    dest: molecule/default/requirements.tmpl
+#    when: molecule_active
+  - src:  git/templates/gitignore
+    dest: .gitignore
+    force: false

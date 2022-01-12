@@ -1,0 +1,25 @@
+---
+
+- name: Manage projects
+  awx.awx.project:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    name: "{{ project.name }}"
+    description: "{{ project.description | default(project.name) }}"
+    organization: "{{ organization.name }}"
+    scm_credential: "{{ project.scm_credential | default(omit) }}"
+    scm_type: "{{ project.scm_type | default('git') }}"
+    scm_url: "{{ project.scm_url }}"
+    scm_branch: "{{ project.scm_branch | default(omit) }}"
+    scm_update_on_launch: "{{ scm_update_on_launch | default('yes') }}"
+    scm_clean: "{{ project.scm_clean | default(omit) }}"
+    scm_delete_on_update: "{{ project.scm_delete_on_update | default(omit) }}"
+    update_project: yes
+  become: false
+  loop: "{{ awx_resources['projects'] }}"
+  loop_control:
+    loop_var: project
+    label: "{{ project.name }}"

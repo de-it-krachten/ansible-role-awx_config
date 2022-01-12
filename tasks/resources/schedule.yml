@@ -1,0 +1,23 @@
+---
+
+- name: Manage schedules
+  awx.awx.schedule:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    name: "{{ schedule.name }}"
+    state: "{{ schedule.state | default('present') }}"
+    description: "{{ schedule.description | default(omit) }}"
+
+    inventory: "{{ schedule.inventory | default(omit) }}"
+    extra_data: "{{ schedule.extra_data | default({}) }}"
+    unified_job_template: "{{ schedule.unified_job_template | default(omit) }}"
+    rrule: "{{ schedule.rrule }}"
+
+  become: false
+  loop: "{{ awx_resources['schedules'] }}"
+  loop_control:
+    loop_var: schedule
+    label: "{{ schedule.name }}"

@@ -1,0 +1,63 @@
+---
+
+
+# Inventory
+
+- name: Manage rights on inventory
+  awx.awx.role:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    role: read
+    state: present
+    inventory: "{{ inventory.name }}"
+    team: "{{ org_short }}"
+  loop: "{{ awx_resources['inventories'] }}"
+  loop_control:
+    loop_var: inventory
+    label: "{{ inventory.name }}"
+  when: awx_resources['inventories'] is defined
+
+# Projects
+
+- name: Manage rights on projects
+  awx.awx.role:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    role: update
+    state: present
+    project: "{{ project.name }}"
+    team: "{{ org_short }}"
+  become: false
+  loop: "{{ awx_resources['projects'] }}"
+  loop_control:
+    loop_var: project
+    label: "{{ project.name }}"
+  when: awx_resources['projects'] is defined
+
+
+# Job templates
+
+- name: Manage job template rights
+  awx.awx.role:
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
+
+    role: execute
+    state: present
+    job_template: "{{ job_template.name }}"
+    team: "{{ org_short }}"
+  vars:
+    query: "results[?summary_fields.inventory.name==`+job_template.inventory+`]|[?name==`+job_template.name+`].id"
+  loop: "{{ awx_resources['job_templates'] }}"
+  loop_control:
+    loop_var: job_template
+    label: "{{ job_template.name }}"
+  when: awx_resources['job_templates'] is defined
