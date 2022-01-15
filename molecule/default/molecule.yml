@@ -10,7 +10,7 @@ lint: |
   ansible-lint
 platforms:
   - name: awx_config-oraclelinux8
-    image: "oraclelinux:8"
+    image: oraclelinux:8
     dockerfile: Dockerfile.oraclelinux8.j2
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:

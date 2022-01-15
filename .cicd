@@ -72,14 +72,15 @@ gitlab:
 molecule:
   active: true
   platforms:
-    - centos7
-    - centos8
-    - rockylinux8
-    - debian10
-    - debian11
-    - ubuntu1804
-    - ubuntu2004
-    - fedora34
+    # - centos7
+    # - centos8
+    # - rockylinux8
+    # - debian10
+    # - debian11
+    # - ubuntu1804
+    # - ubuntu2004
+    # - fedora34
+    - oraclelinux8
 
   converge:
     playbooks: []
