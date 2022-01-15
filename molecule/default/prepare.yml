@@ -4,10 +4,9 @@
   hosts: all
   become: yes
   vars:
-    proxy_use: false
-    proxy_url: "http://127.0.0.1:3128"
+    proxy_use: "{{ lookup('env', 'proxy_use') | default(False, True) | bool }}"
+    proxy_url: "{{ lookup('env', 'proxy_url') | default('http://127.0.0.1:3128', True) }}"
     molecule_distro: "{{ lookup('env', 'MOLECULE_DISTRO') }}"
-    x: y
   tasks:
 
     - block:
@@ -22,7 +21,7 @@
             owner: root
             group: root
             mode: "0644"
-          when: proxy_use|bool
+          when: proxy_use is defined and proxy_use|bool
 
         - name: Update APT cache
           apt:
@@ -50,7 +49,7 @@
             path: /etc/yum.conf
             line: "proxy={{ proxy_url }}"
             regexp: "^proxy=.*$"
-          when: proxy_use|bool
+          when: proxy_use is defined and proxy_use|bool
 
         - name: Update YUM cache  # noqa command-instead-of-module
           command: yum makecache
@@ -65,7 +64,7 @@
             path: /etc/dnf/dnf.conf
             line: "proxy={{ proxy_url }}"
             regexp: "^proxy=.*$"
-          when: proxy_use|bool
+          when: proxy_use is defined and proxy_use|bool
 
         - name: Update DNF cache
           dnf:

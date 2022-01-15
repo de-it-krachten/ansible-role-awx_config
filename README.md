@@ -13,6 +13,8 @@ Supported platforms
 
 - CentOS 7
 - CentOS 8
+- RockyLinux 8
+- AlmaLinux 8
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
@@ -64,52 +66,7 @@ Example Playbook
 - name: Converge
   hosts: all
   vars:
-
-    # olam
-    olam_admin_username: admin
-    olam_admin_password: admin
-    olam_disable_ipv6: true
-    olam_demo_data: false
-
-    # awx_config
-    awx_url: https://localhost/api/v2
-    awx_validate_certs: false
-    awx_user: admin
-    awx_pass: admin
-
-    awx_organizations:
-      - name: organization1
-        short_name: org1
-        description: Company organization nr1
-        file: org1.yml
-        #galaxy_credentials:
-        #  - Ansible Galaxy
-      - name: organization2
-        short_name: org2
-        description: Company organization nr2
-        file: org2.yml
-
-    awx_organization_path: molecule/default/tests/data
-
   tasks:
-    - name: Include role 'ansible-role-olam'
-      include_role:
-        name: ansible-role-olam
-
-    - name: Flush handlers
-      meta: flush_handlers
-
-    - name: Pause play until a URL is reachable from this host
-      uri:
-        url: "{{ awx_url }}"
-        validate_certs: "{{ awx_validate_certs }}"
-        follow_redirects: yes
-        method: GET
-      register: _result
-      until: _result.status == 200
-      retries: 30
-      delay: 10
-
     - name: Include role 'ansible-role-awx_config'
       include_role:
         name: ansible-role-awx_config

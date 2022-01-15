@@ -1,0 +1,6 @@
+generic:
+  role_description: |
+    AWX configuration (configuration-as-code)
+ci_templates:
+  molecule.yml:
+    force: false
