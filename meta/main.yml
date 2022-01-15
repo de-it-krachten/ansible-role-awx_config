@@ -21,4 +21,7 @@ galaxy_info:
       versions:
         - 18.04
         - 20.04
+    - name: Fedora
+      versions:
+        - all
 dependencies: []

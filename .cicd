@@ -1,17 +1,22 @@
 ---
 
 # Generic
-role: ansible-role-awx_config
-role_short: awx_config
-role_description: |
-  AWX configuration (configuration-as-code)
+generic:
+  role: ansible-role-awx_config
+  role_short: awx_config
+  role_description: |
+    <put description in .cicd.overwrite>
 
-# Supported platform
+# Supported platforms
 platforms:
   - name: CentOS 7
     image: centos7
   - name: CentOS 8
     image: centos8
+  - name: RockyLinux 8
+    image: rockylinux8
+  - name: AlmaLinux 8
+    image: almalinux8
   - name: Debian 10 (Buster)
     image: debian10
   - name: Debian 11 (Bullseye)
@@ -20,6 +25,9 @@ platforms:
     image: ubuntu1804
   - name: Ubuntu 20.04 LTS
     image: ubuntu2004
+  - name: Fedora 34
+    image: fedora34
+
 
 # Ansible galaxy
 galaxy:
@@ -43,6 +51,10 @@ galaxy:
       versions:
         - 18.04
         - 20.04
+    - name: Fedora
+      versions:
+        - all
+
 
 # Github
 github:
@@ -62,62 +74,65 @@ molecule:
   platforms:
     - centos7
     - centos8
+    - rockylinux8
     - debian10
     - debian11
     - ubuntu1804
     - ubuntu2004
+    - fedora34
+
   converge:
     playbooks: []
-    vars:
-      awx_url: https://localhost/api/v2
-      awx_validate_certs: false
-      awx_user: awx
-      awx_pass: awx
-
-      awx_organizations:
-        - name: organization1
-          short_name: org1
-          description: "Company organization nr1"
-          file: org1.yml
-          galaxy_credentials:
-            - Ansible Galaxy
-        - name: organization2
-          short_name: org2
-          description: "Company organization nr2"
-          file: org2.yml
-      awx_organization_path: molecules/default/tests/data
+    vars: {}
   prepare:
     playbooks: []
     vars: {}
 
 # templates
 ci_templates:
-  - src:  galaxy/templates/meta-main.yml
+  meta-main.yml:
+    src: galaxy/templates/meta-main.yml
     dest: meta/main.yml
-  - src:  yamllint/templates/yamllint
+  yamllint:
+    src: yamllint/templates/yamllint
     dest: .yamllint
-  - src:  github/templates/ci.yml
+  ci.yml:
+    src: github/templates/ci.yml
     dest: .github/workflows/ci.yml
     when: github_runner_cloud
-  - src:  github/templates/ci-self-hosted.yml
+  ci-self-hosted.yml:
+    src: github/templates/ci-self-hosted.yml
     dest: .github/workflows/ci.yml
     when: github_runner_self_hosted
-  - src:  gitlab/templates/gitlab-ci.yml
+  release.yml:
+    src: github/templates/release.yml
+    dest: .github/workflows/release.yml
+    when: github_runner_cloud
+  releaserc.yml:
+    src: github/templates/releaserc.yml
+    dest: .github/workflows/.releaserc.yml
+    when: github_runner_cloud
+  gitlab-ci.yml:
+    src: gitlab/templates/gitlab-ci.yml
     dest: .gitlab-ci.yml
     when: gitlab_active
-  - src:  molecule/templates/prepare.yml
+  prepare.yml:
+    src: molecule/templates/prepare.yml
     dest: molecule/default/prepare.yml
     when: molecule_active
-  - src:  molecule/templates/molecule.yml
+  molecule.yml:
+    src: molecule/templates/molecule.yml
     dest: molecule/default/molecule.yml
-    force: false
     when: molecule_active
-  - src:  molecule/templates/converge.yml
+  converge.yml:
+    src: molecule/templates/converge.yml
     dest: molecule/default/converge.yml
     when: molecule_active
-#  - src:  molecule/templates/requirements.tmpl
+#  requirements.tmpl:
+#    src: molecule/templates/requirements.tmpl
 #    dest: molecule/default/requirements.tmpl
 #    when: molecule_active
-  - src:  git/templates/gitignore
+  gitignore:
+    src: git/templates/gitignore
     dest: .gitignore
     force: false
