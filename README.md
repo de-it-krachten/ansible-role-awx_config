@@ -13,6 +13,8 @@ Supported platforms
 
 - CentOS 7
 - CentOS 8
+- RockyLinux 8
+- AlmaLinux 8
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 18.04 LTS
@@ -61,7 +63,7 @@ Example Playbook
 ----------------
 
 <pre><code>
-- name: Converge
+- name: sample playbook for role 'awx_config'
   hosts: all
   vars:
 
@@ -92,17 +94,17 @@ Example Playbook
     awx_organization_path: molecule/default/tests/data
 
   tasks:
-    - name: Include role 'ansible-role-olam'
+    - name: Include role 'olam'
       include_role:
-        name: ansible-role-olam
+        name: olam
 
     - name: Flush handlers
       meta: flush_handlers
 
     - name: Pause play until a URL is reachable from this host
       uri:
-        url: "{{ awx_url }}"
-        validate_certs: "{{ awx_validate_certs }}"
+        url: {{ awx_url }}
+        validate_certs: {{ awx_validate_certs }}
         follow_redirects: yes
         method: GET
       register: _result
@@ -110,7 +112,7 @@ Example Playbook
       retries: 30
       delay: 10
 
-    - name: Include role 'ansible-role-awx_config'
+    - name: Include role 'awx_config'
       include_role:
-        name: ansible-role-awx_config
+        name: awx_config
 </pre></code>

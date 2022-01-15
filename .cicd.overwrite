@@ -1,0 +1,14 @@
+generic:
+  role_description: |
+    AWX configuration (configuration-as-code)
+ci_templates:
+  molecule.yml:
+    force: false
+  converge.yml:
+    force: false
+molecule:
+  platforms:
+    - oraclelinux8
+  converge:
+    vars:
+      awx_manage_roles: false
