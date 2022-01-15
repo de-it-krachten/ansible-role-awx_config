@@ -15,6 +15,7 @@
     awx_validate_certs: false
     awx_user: admin
     awx_pass: admin
+    awx_manage_roles: false
 
     awx_organizations:
       - name: organization1
@@ -33,7 +34,7 @@
   tasks:
     - name: Include role 'ansible-role-olam'
       include_role:
-        name: ansible-role-olam
+        name: olam
 
     - name: Flush handlers
       meta: flush_handlers

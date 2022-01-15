@@ -9,6 +9,3 @@ ci_templates:
 molecule:
   platforms:
     - oraclelinux8
-  converge:
-    vars:
-      awx_manage_roles: false
