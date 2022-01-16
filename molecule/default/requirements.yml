@@ -2,15 +2,9 @@
 
 roles:
 
-  - name: hosts
-    src: https://github.com/de-it-krachten/ansible-role-hosts.git
-    version: main
-    scm: git
-
   - name: olam
     src: https://github.com/de-it-krachten/ansible-role-olam.git
-    #version: main
-    version: dev
+    version: main
     scm: git
 
   - name: openssl

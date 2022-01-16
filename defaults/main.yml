@@ -8,6 +8,8 @@ awx_organization_path: data
 
 # AWX API url
 awx_url: https://localhost/api/v2
+
+# Check/validate SSL certificates
 awx_validate_certs: false
 
 # AWX user + password
@@ -27,6 +29,5 @@ awx_manage_hosts:         true
 awx_manage_groups:        true
 awx_manage_job_templates: true
 awx_manage_schedules:     true
-#@#awx_manage_roles:         true
-awx_manage_roles:         false
+awx_manage_roles:         true
 awx_delete_hosts:         false
