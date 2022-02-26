@@ -6,6 +6,8 @@ ci_templates:
     force: false
   converge.yml:
     force: false
+  requirements.yml:
+    force: false
 molecule:
   platforms:
     - oraclelinux8
