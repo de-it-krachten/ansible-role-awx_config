@@ -12,7 +12,6 @@ Platforms
 Supported platforms
 
 - CentOS 7
-- CentOS 8
 - RockyLinux 8
 - AlmaLinux 8
 - Debian 10 (Buster)
@@ -78,6 +77,7 @@ Example Playbook
     awx_validate_certs: false
     awx_user: admin
     awx_pass: admin
+    awx_manage_roles: false
 
     awx_organizations:
       - name: organization1
@@ -103,8 +103,8 @@ Example Playbook
 
     - name: Pause play until a URL is reachable from this host
       uri:
-        url: {{ awx_url }}
-        validate_certs: {{ awx_validate_certs }}
+        url: "{{ awx_url }}"
+        validate_certs: "{{ awx_validate_certs }}"
         follow_redirects: yes
         method: GET
       register: _result
