@@ -9,14 +9,16 @@ lint: |
   yamllint .
   ansible-lint
 platforms:
-  - name: awx_config-oraclelinux8
-    image: "oraclelinux:8"
-    dockerfile: Dockerfile.oraclelinux8.j2
+{% for platform in MOLECULE_DISTROS %}
+  - name: awx_config-{{ platform }}
+    # image: "geerlingguy/docker-{{ platform }}-ansible:latest"
+    image: "dropveter/olam:latest"
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     privileged: true
-    pre_build_image: false
+    pre_build_image: true
+{% endfor %}
 provisioner:
   name: ansible
   env:
@@ -27,7 +29,7 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
   inventory:
     host_vars:
-      awx_config-centos8:
+      awx_config-rockylinux8:
         ansible_python_interpreter: /usr/libexec/platform-python
 scenario:
   name: default

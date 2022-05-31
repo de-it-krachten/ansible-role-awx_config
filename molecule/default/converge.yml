@@ -32,12 +32,6 @@
     awx_organization_path: molecule/default/tests/data
 
   tasks:
-    - name: Include role 'ansible-role-olam'
-      include_role:
-        name: olam
-
-    - name: Flush handlers
-      meta: flush_handlers
 
     - name: Pause play until a URL is reachable from this host
       uri:
