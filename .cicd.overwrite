@@ -1,13 +1,17 @@
+---
+
 generic:
   role_description: |
     AWX configuration (configuration-as-code)
+
 ci_templates:
-  molecule.yml:
+  molecule.yml.j2:
     force: false
   converge.yml:
     force: false
   requirements.yml:
     force: false
+
 molecule:
   platforms:
     - oraclelinux8
