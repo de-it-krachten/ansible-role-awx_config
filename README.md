@@ -6,26 +6,17 @@
 AWX configuration (configuration-as-code)
 
 
-Platforms
---------------
+## Platforms
 
 Supported platforms
 
-- Red Hat Enterprise Linux 7<sup>1</sup>
-- Red Hat Enterprise Linux 8<sup>1</sup>
-- CentOS 7
-- RockyLinux 8
-- AlmaLinux 8<sup>1</sup>
-- Debian 10 (Buster)
-- Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
-- Ubuntu 20.04 LTS
+- OracleLinux 8
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
 
-Role Variables
---------------
+## Role Variables
+### defaults/main.yml
 <pre><code>
 # List of organization
 awx_organizations: []
@@ -61,9 +52,9 @@ awx_delete_hosts:         false
 </pre></code>
 
 
-Example Playbook
-----------------
 
+## Example Playbook
+### molecule/default/converge.yml
 <pre><code>
 - name: sample playbook for role 'awx_config'
   hosts: all
@@ -97,12 +88,6 @@ Example Playbook
     awx_organization_path: molecule/default/tests/data
 
   tasks:
-    - name: Include role 'olam'
-      include_role:
-        name: olam
-
-    - name: Flush handlers
-      meta: flush_handlers
 
     - name: Pause play until a URL is reachable from this host
       uri:
