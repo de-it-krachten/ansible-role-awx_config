@@ -10,6 +10,7 @@ AWX configuration (configuration-as-code)
 
 Supported platforms
 
+- RockyLinux 9
 - OracleLinux 8
 
 Note:
