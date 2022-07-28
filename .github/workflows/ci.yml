@@ -131,7 +131,7 @@ jobs:
           sudo chmod 755 /usr/local/bin/molecule-test.sh
 
       - name: Run Molecule tests.
-        run: molecule-test.sh
+        run: molecule-test.sh -d -vvvv
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
