@@ -55,7 +55,7 @@
     job_template: "{{ job_template.name }}"
     team: "{{ org_short }}"
   vars:
-    query: "results[?summary_fields.inventory.name==`+job_template.inventory+`]|[?name==`+job_template.name+`].id"
+    query: "results[?summary_fields.inventory.name==`+ job_template.inventory +`] | [?name==`+ job_template.name +`].id"
   loop: "{{ awx_resources['job_templates'] }}"
   loop_control:
     loop_var: job_template

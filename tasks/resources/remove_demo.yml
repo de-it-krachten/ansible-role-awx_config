@@ -12,7 +12,7 @@
     job_type: run
     project: ""
     playbook: ""
-  when: manage_demo|bool
+  when: manage_demo | bool
 
 - name: Remove organization 'Default'
   awx.awx.organization:
@@ -23,4 +23,4 @@
 
     name: Default
     state: absent
-  when: manage_demo|bool
+  when: manage_demo | bool
