@@ -6,10 +6,21 @@
 AWX configuration (configuration-as-code)
 
 
+
+## Dependencies
+
+#### Roles
+None
+
+#### Collections
+- community.general
+- awx.awx
+
 ## Platforms
 
 Supported platforms
 
+- RockyLinux 9
 - OracleLinux 8
 
 Note:
@@ -50,6 +61,7 @@ awx_manage_schedules:     true
 awx_manage_roles:         true
 awx_delete_hosts:         false
 </pre></code>
+
 
 
 

@@ -1,4 +1,6 @@
 ---
 
+- name: rockylinux9
+  image: geerlingguy/docker-rockylinux9-ansible:latest
 - name: oraclelinux8
-  image: dropveter/olam:latest
+  image: dropveter/oraclelinux8-ansible
