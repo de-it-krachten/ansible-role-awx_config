@@ -1,0 +1,5 @@
+---
+collections:
+  - awx.awx
+  - environment
+  - with_fileglob

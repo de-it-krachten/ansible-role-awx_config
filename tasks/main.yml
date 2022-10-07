@@ -1,15 +1,15 @@
 ---
 
 - name: Configure organizations
-  include_tasks: organization.yml
+  ansible.builtin.include_tasks: organization.yml
 
 - name: Combine all variable files
-  set_fact:
-    awx_resources_all: "{{ awx_resources_all|default({}) | combine((lookup('file', item) | from_yaml), recursive=True) }}"
+  ansible.builtin.set_fact:
+    awx_resources_all: "{{ awx_resources_all | default({}) | combine((lookup('file', item) | from_yaml), recursive=True) }}"
   with_fileglob: "{{ awx_organization_path }}/*.yml" 
 
 - name: Set-up resources by organization
-  include_tasks: resources.yml
+  ansible.builtin.include_tasks: resources.yml
   loop: "{{ awx_organizations }}"
   loop_control:
     loop_var: organization

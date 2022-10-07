@@ -1,5 +1,5 @@
 ---
-- name: manage team
+- name: Manage team
   awx.awx.team:
     controller_host:       "{{ awx_url }}"
     controller_username:   "{{ awx_user }}"

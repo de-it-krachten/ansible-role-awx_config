@@ -1,7 +1,8 @@
 ---
 
 - name: Manage host group membership for {{ hostname }}
-  command: >
+  # possible ambiguous replacement: command : ansible.builtin.command | community.ciscosmb.command | community.routeros.command
+  ansible.builtin.command: >
     tower-cli
     host associate
     --host "{{ awx_hosts|json_query('[?summary_fields.inventory.name==`' + inventory + '`]|[?name==`' + hostname + '`].id') |join }}"

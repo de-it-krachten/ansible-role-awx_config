@@ -8,7 +8,7 @@
     validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ group.name }}"
-    state: "{{ group.state|default('present') }}"
+    state: "{{ group.state | default('present') }}"
     inventory: "{{ group.inventory }}"
     description: "{{ group.description | default(omit) }}"
     variables: "{{ group.variables | default({}) }}"
