@@ -2,10 +2,10 @@
 
 - name: Manage inventory
   awx.awx.inventory:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ inventory.name }}"
     description: "{{ inventory.description | default(inventory.name) }}"

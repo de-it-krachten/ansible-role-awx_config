@@ -1,10 +1,10 @@
 ---
-- name: manage team
+- name: Manage team
   awx.awx.team:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ team.name }}"
     description: "{{ team.description | default(team.name) }}"

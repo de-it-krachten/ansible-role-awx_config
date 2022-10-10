@@ -16,4 +16,4 @@
   loop: "{{ awx_organizations }}"
   loop_control:
     loop_var: organization
-  when: awx_manage_organizations|bool
+  when: awx_manage_organizations | bool

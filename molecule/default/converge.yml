@@ -22,8 +22,8 @@
         short_name: org1
         description: Company organization nr1
         file: org1.yml
-        #galaxy_credentials:
-        #  - Ansible Galaxy
+        # galaxy_credentials:
+        #   - Ansible Galaxy
       - name: organization2
         short_name: org2
         description: Company organization nr2

@@ -2,25 +2,25 @@
 
 - name: Remove the demo job template
   awx.awx.job_template:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     name: "Demo Job Template"
     state: absent
     job_type: run
     project: ""
     playbook: ""
-  when: manage_demo|bool
+  when: manage_demo | bool
 
 - name: Remove organization 'Default'
   awx.awx.organization:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     name: Default
     state: absent
-  when: manage_demo|bool
+  when: manage_demo | bool
