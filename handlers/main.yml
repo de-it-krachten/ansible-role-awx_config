@@ -1,5 +1,5 @@
 ---
 
-- name: wait 30 seconds
-  pause:
+- name: Wait 30 seconds
+  ansible.builtin.pause:
     seconds: 30

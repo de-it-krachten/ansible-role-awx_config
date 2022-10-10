@@ -1,4 +1,5 @@
 ---
 
 exclude_paths:
-  - molecule/default/molecule-test.yml
+  - molecule/
+

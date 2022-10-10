@@ -8,7 +8,7 @@
     validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ host.name }}"
-    state: "{{ host.state|default('present') }}"
+    state: "{{ host.state | default('present') }}"
     inventory: "{{ host.inventory }}"
     description: "{{ host.description | default(omit) }}"
     variables: "{{ host.variables | default({}) }}"

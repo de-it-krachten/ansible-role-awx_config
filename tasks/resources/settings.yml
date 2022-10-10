@@ -2,17 +2,17 @@
 
 - name: Set tower-awx settings (domain_env={{ domain_env }})
   awx.awx.settings:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user }}"
+    controller_password: "{{ awx_pass }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ item }}"
-    value: "{{ lookup('template', vars[item]|lower+'.json.j2') if item == vars[item] else vars[item] }}"
+    value: "{{ lookup('template', vars[item] | lower + '.json.j2') if item == vars[item] else vars[item] }}"
 
   become: false
   loop: "{{ awx_settings_all }}"
   loop_control:
     label:
       - "name: {{ item }}"
-  when: manage_settings|bool
+  when: manage_settings | bool
