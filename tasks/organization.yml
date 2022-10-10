@@ -3,9 +3,10 @@
 - name: Manage organizations
   awx.awx.organization:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
     validate_certs: "{{ awx_validate_certs }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
 
     name: "{{ organization.name }}"
     state: "{{ organization.state | default(omit) }}"

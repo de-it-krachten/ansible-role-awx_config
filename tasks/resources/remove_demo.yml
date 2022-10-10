@@ -3,8 +3,9 @@
 - name: Remove the demo job template
   awx.awx.job_template:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     name: "Demo Job Template"
@@ -17,8 +18,9 @@
 - name: Remove organization 'Default'
   awx.awx.organization:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     name: Default

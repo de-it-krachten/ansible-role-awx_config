@@ -134,17 +134,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: rockylinux9_2.9
-            distro: rockylinux9
-            playbook: converge.yml
-            ansible: "ansible==2.9.27"
-            ansible_lint: "ansible-lint==5.4.0"
-          - name: rockylinux9_2.13
-            distro: rockylinux9
-            playbook: converge.yml
-            ansible: "ansible-core>2.13,<2.14"
-            ansible_lint: "ansible-lint>6,<7"
-
           - name: oraclelinux8_2.9
             distro: oraclelinux8
             playbook: converge.yml

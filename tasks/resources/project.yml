@@ -3,8 +3,9 @@
 - name: Manage projects
   awx.awx.project:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ project.name }}"

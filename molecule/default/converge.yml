@@ -11,11 +11,12 @@
     olam_demo_data: false
 
     # awx_config
-    awx_url: https://localhost/api/v2
+    awx_url: https://localhost
     awx_validate_certs: false
     awx_user: admin
     awx_pass: admin
     awx_manage_roles: false
+    awx_version: "15.0.1"
 
     awx_organizations:
       - name: organization1
@@ -43,6 +44,16 @@
       until: _result.status == 200
       retries: 30
       delay: 10
+
+    - name: Install awxkit
+      pip:
+        name: "awxkit=={{ awx_version }}"
+        executable: pip3
+
+    - name: Get Oauth tokeb
+      include_role:
+        name: ansible-role-awx_config
+        tasks_from: login.yml
 
     - name: Include role 'ansible-role-awx_config'
       include_role:

@@ -1,0 +1,16 @@
+---
+
+- name: Retrieve Oauth2 token
+  ansible.builtin.command: >-
+    awx login
+  environment:
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_user }}"
+    TOWER_PASSWORD: "{{ awx_pass }}"
+    TOWER_VERIFY_SSL: "{{ awx_validate_certs }}"
+  changed_when: false
+  register: _awx_oauth
+
+- name: Save token
+  ansible.builtin.set_fact:
+    awx_token: "{{ _awx_oauth.stdout | from_json | json_query('token') }}"

@@ -20,7 +20,6 @@ None
 
 Supported platforms
 
-- RockyLinux 9
 - OracleLinux 8
 
 Note:
@@ -36,7 +35,7 @@ awx_organizations: []
 awx_organization_path: data
 
 # AWX API url
-awx_url: https://localhost/api/v2
+awx_url: https://localhost
 
 # Check/validate SSL certificates
 awx_validate_certs: false
@@ -79,7 +78,7 @@ awx_delete_hosts: false
     olam_demo_data: false
 
     # awx_config
-    awx_url: https://localhost/api/v2
+    awx_url: https://localhost
     awx_validate_certs: false
     awx_user: admin
     awx_pass: admin
@@ -90,8 +89,8 @@ awx_delete_hosts: false
         short_name: org1
         description: Company organization nr1
         file: org1.yml
-        #galaxy_credentials:
-        #  - Ansible Galaxy
+        # galaxy_credentials:
+        #   - Ansible Galaxy
       - name: organization2
         short_name: org2
         description: Company organization nr2
@@ -111,6 +110,11 @@ awx_delete_hosts: false
       until: _result.status == 200
       retries: 30
       delay: 10
+
+    - name: Get Oauth tokeb
+      include_role:
+        name: awx_config
+        tasks_from: login.yml
 
     - name: Include role 'awx_config'
       include_role:

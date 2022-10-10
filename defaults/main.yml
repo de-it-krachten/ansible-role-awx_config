@@ -7,7 +7,7 @@ awx_organizations: []
 awx_organization_path: data
 
 # AWX API url
-awx_url: https://localhost/api/v2
+awx_url: https://localhost
 
 # Check/validate SSL certificates
 awx_validate_certs: false
