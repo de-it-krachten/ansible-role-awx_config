@@ -2,10 +2,11 @@
 
 - name: Manage users
   awx.awx.user:
-    controller_host:       "{{ awx_url }}"
-    controller_username:   "{{ awx_user }}"
-    controller_password:   "{{ awx_pass }}"
-    validate_certs:        "{{ awx_validate_certs }}"
+    controller_host: "{{ awx_url }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
+    validate_certs: "{{ awx_validate_certs }}"
 
     username: "{{ user.username }}"
     password: "{{ user.password | default(initial_password) | default(omit) }}"
@@ -13,7 +14,7 @@
     first_name: "{{ user.first_name | default(omit) }}"
     last_name: "{{ user.last_name | default(omit) }}"
     superuser: "{{ user.superuser | default(omit) }}"
-    auditor: "{{ user.auditor| default(omit) }}"
+    auditor: "{{ user.auditor | default(omit) }}"
   become: false
   when:
     - user.email is defined

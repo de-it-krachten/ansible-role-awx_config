@@ -24,14 +24,15 @@ platforms:
   rockylinux8:
     ci: false
     supported: false
+  rockylinux9:
+    ci: false
+    supported: false
   oraclelinux8:
-    name: OracleLinux 8
     ci: true
     supported: true
-    image: "dropveter/olam:latest"
-    galaxy:
-      name: EL
-      version: 8
+    molecule:
+      docker:
+        image: "dropveter/olam:latest"
   almalinux8:
     ci: false
     supported: false

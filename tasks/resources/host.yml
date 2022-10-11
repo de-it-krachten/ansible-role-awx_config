@@ -3,12 +3,13 @@
 - name: Manage hosts
   awx.awx.host:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     name: "{{ host.name }}"
-    state: "{{ host.state|default('present') }}"
+    state: "{{ host.state | default('present') }}"
     inventory: "{{ host.inventory }}"
     description: "{{ host.description | default(omit) }}"
     variables: "{{ host.variables | default({}) }}"
