@@ -4,14 +4,72 @@ generic:
   role_description: |
     AWX configuration (configuration-as-code)
 
+# Supported platforms
+platforms:
+  rhel7:
+    ci: false
+    supported: false
+  rhel8:
+    ci: false
+    supported: false
+  rhel9:
+    ci: false
+    supported: false
+  centos7:
+    ci: false
+    supported: false
+  centos8:
+    ci: false
+    supported: false
+  rockylinux8:
+    ci: false
+    supported: false
+  rockylinux9:
+    ci: false
+    supported: false
+  oraclelinux8:
+    ci: true
+    supported: true
+    molecule:
+      docker:
+        image: "dropveter/olam:latest"
+  almalinux8:
+    ci: false
+    supported: false
+  almalinux9:
+    ci: false
+    supported: false
+  debian10:
+    ci: false
+    supported: false
+  debian11:
+    ci: false
+    supported: false
+  ubuntu1804:
+    ci: false
+    supported: false
+  ubuntu2004:
+    ci: false
+    supported: false
+  ubuntu2204:
+    ci: false
+    supported: false
+  fedora35:
+    ci: false
+    supported: false
+  fedora36:
+    ci: false
+    supported: false
+  alpine:
+    ci: false
+    supported: false
+
 ci_templates:
-  molecule.yml.j2:
-    force: false
   converge.yml:
-    force: false
-  requirements.yml:
     force: false
 
 molecule:
-  platforms:
-    - oraclelinux8
+  requirements:
+    roles_extra:
+      - olam
+      - openssl

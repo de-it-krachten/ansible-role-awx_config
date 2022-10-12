@@ -14,7 +14,7 @@ awx_resources:
       - name: team1
       - name: team2
 
-  #  hostgroups:
+    # hostgroups:
     groups:
       - name: group1
         inventory: inventory1
@@ -59,7 +59,7 @@ awx_resources:
         scm_type: git
         scm_url: https://github.com/de-it-krachten/ansible-playbooks-test
         scm_branch: main
-        #scm_credential: credential1
+        # scm_credential: credential1
 
     job_templates:
       - name: job_template1
@@ -75,4 +75,4 @@ awx_resources:
     schedules:
       - name: schedule1
         unified_job_template: job_template1
-        rrule: "DTSTART;TZID=Europe/Amsterdam:20190101T030000 RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=TH;BYSETPOS=3" 
+        rrule: "DTSTART;TZID=Europe/Amsterdam:20190101T030000 RRULE:FREQ=MONTHLY;INTERVAL=1;BYDAY=TH;BYSETPOS=3"

@@ -6,8 +6,9 @@
 - name: Manage rights on inventory
   awx.awx.role:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     role: read
@@ -25,8 +26,9 @@
 - name: Manage rights on projects
   awx.awx.role:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     role: update
@@ -46,8 +48,9 @@
 - name: Manage job template rights
   awx.awx.role:
     controller_host: "{{ awx_url }}"
-    controller_username: "{{ awx_user }}"
-    controller_password: "{{ awx_pass }}"
+    controller_username: "{{ awx_user if awx_token is undefined else omit }}"
+    controller_password: "{{ awx_pass if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
     validate_certs: "{{ awx_validate_certs }}"
 
     role: execute
@@ -55,7 +58,7 @@
     job_template: "{{ job_template.name }}"
     team: "{{ org_short }}"
   vars:
-    query: "results[?summary_fields.inventory.name==`+job_template.inventory+`]|[?name==`+job_template.name+`].id"
+    query: "results[?summary_fields.inventory.name==`+ job_template.inventory +`] | [?name==`+ job_template.name +`].id"
   loop: "{{ awx_resources['job_templates'] }}"
   loop_control:
     loop_var: job_template
