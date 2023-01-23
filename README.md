@@ -21,6 +21,7 @@ None
 Supported platforms
 
 - OracleLinux 8
+- OracleLinux 9
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -83,6 +84,7 @@ awx_delete_hosts: false
     awx_user: admin
     awx_pass: admin
     awx_manage_roles: false
+    awx_version: "15.0.1"
 
     awx_organizations:
       - name: organization1
@@ -110,6 +112,11 @@ awx_delete_hosts: false
       until: _result.status == 200
       retries: 30
       delay: 10
+
+    - name: Install awxkit
+      pip:
+        name: "awxkit=={{ awx_version }}"
+        executable: pip3
 
     - name: Get Oauth tokeb
       include_role:
