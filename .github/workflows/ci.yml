@@ -40,8 +40,12 @@ jobs:
             ansible_lint: "ansible-lint>6,<7"
           - name: "ansible_2.13"
             # ansible: "ansible>6,<7"
-            ansible: "ansible-core<2.13,<2.14"
+            ansible: "ansible-core>2.13,<2.14"
             ansible_lint: "ansible-lint>6,<7"
+          - name: "ansible_2.14"
+            # ansible: "ansible>6,<7"
+            ansible: "ansible-core>2.14,<2.15"
+            ansible_lint: "ansible-lint"
 
     steps:
       - name: Check out the codebase.
@@ -50,7 +54,7 @@ jobs:
           path: "${{ github.repository }}"
 
       - name: Set up Python 3.
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -127,7 +131,7 @@ jobs:
 
   molecule:
     name: "${{ matrix.name }}"
-    runs-on: ubuntu-latest
+    runs-on: "${{ matrix.runs_on }}"
     needs: lint
     # continue-on-error: ${{ matrix.continue_on_error }}
     strategy:
@@ -135,11 +139,13 @@ jobs:
       matrix:
         include:
           - name: oraclelinux8_2.9
+            runs_on: ubuntu-latest
             distro: oraclelinux8
             playbook: converge.yml
             ansible: "ansible==2.9.27"
             ansible_lint: "ansible-lint==5.4.0"
           - name: oraclelinux8_2.13
+            runs_on: ubuntu-latest
             distro: oraclelinux8
             playbook: converge.yml
             ansible: "ansible-core>2.13,<2.14"
@@ -147,13 +153,15 @@ jobs:
 
 
     steps:
+
       - name: Check out the codebase.
         uses: actions/checkout@v3
         with:
           path: "${{ github.repository }}"
 
+
       - name: Set up Python 3.
-        uses: actions/setup-python@v3
+        uses: actions/setup-python@v4
         with:
           python-version: '3.x'
 
@@ -170,7 +178,7 @@ jobs:
 
       - name: Install test dependencies.
         run: |
-          pip3 install "${{ matrix.ansible }}" "${{ matrix.ansible_lint }}" molecule[docker] molecule-hetznercloud docker yamllint jmespath e2j2 yq
+          pip3 install "${{ matrix.ansible }}" "${{ matrix.ansible_lint }}" molecule[docker] yamllint jmespath e2j2 yq
 
       - name: Install required galaxy collections
         run: |
