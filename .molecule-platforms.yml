@@ -2,5 +2,3 @@
 
 - name: oraclelinux8
   image: dropveter/olam:latest
-- name: oraclelinux9
-  image: dropveter/oraclelinux9-ansible

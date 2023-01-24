@@ -33,6 +33,9 @@ platforms:
     molecule:
       docker:
         image: "dropveter/olam:latest"
+  oraclelinux9:
+    ci: false
+    supported: false
   almalinux8:
     ci: false
     supported: false
