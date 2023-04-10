@@ -41,11 +41,11 @@ roles:
     src: https://github.com/de-it-krachten/ansible-role-unbound.git
     version: main
     scm: git
-  - name: olam
+  - name: deitkrachten.olam
     src: https://github.com/de-it-krachten/ansible-role-olam.git
     version: main
     scm: git
-  - name: openssl
+  - name: deitkrachten.openssl
     src: https://github.com/de-it-krachten/ansible-role-openssl.git
     version: main
     scm: git
