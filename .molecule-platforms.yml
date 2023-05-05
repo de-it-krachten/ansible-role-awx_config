@@ -1,4 +1,0 @@
----
-
-- name: oraclelinux8
-  image: dropveter/olam:latest
