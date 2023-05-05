@@ -17,6 +17,10 @@ roles:
     src: https://github.com/de-it-krachten/ansible-role-firewalld.git
     version: main
     scm: git
+  - name: deitkrachten.hosts
+    src: https://github.com/de-it-krachten/ansible-role-hosts.git
+    version: main
+    scm: git
   - name: deitkrachten.iptables
     src: https://github.com/de-it-krachten/ansible-role-iptables.git
     version: main
@@ -41,11 +45,11 @@ roles:
     src: https://github.com/de-it-krachten/ansible-role-unbound.git
     version: main
     scm: git
-  - name: deitkrachten.olam
+  - name: olam
     src: https://github.com/de-it-krachten/ansible-role-olam.git
     version: main
     scm: git
-  - name: deitkrachten.openssl
+  - name: openssl
     src: https://github.com/de-it-krachten/ansible-role-openssl.git
     version: main
     scm: git
