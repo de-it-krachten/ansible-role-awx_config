@@ -21,7 +21,7 @@ None
 Supported platforms
 
 - OracleLinux 8
-- SUSE Linux Enterprise<sup>1</sup>
+- SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
 - Debian 12 (Bookworm)
 - Fedora 37
