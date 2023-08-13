@@ -21,6 +21,10 @@ None
 Supported platforms
 
 - OracleLinux 8
+- SUSE Linux Enterprise<sup>1</sup>
+- openSUSE Leap 15
+- Debian 12 (Bookworm)
+- Fedora 37
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
