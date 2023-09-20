@@ -41,7 +41,7 @@
   box: generic/alma9
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp', 'auto_config': True}]
 - name: opensuse15
-  ci: true
+  ci: false
   box: generic/opensuse15
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp', 'auto_config': True}]
 - name: opensusetumbleweed15
@@ -57,8 +57,8 @@
   box: generic/debian11
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp', 'auto_config': True}]
 - name: debian12
-  ci: true
-  box: generic/debian12
+  ci: false
+  box: debian/bookworm64
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp', 'auto_config': True}]
 - name: ubuntu1804
   ci: false
@@ -73,7 +73,7 @@
   box: generic/ubuntu2204
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp'}]
 - name: fedora37
-  ci: true
+  ci: false
   box: generic/fedora37
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp'}]
 - name: fedora38

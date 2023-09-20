@@ -12,13 +12,4 @@ galaxy_info:
     - name: EL
       versions:
         - '8'
-    - name: opensuse
-      versions:
-        - all
-    - name: Debian
-      versions:
-        - bookworm
-    - name: Fedora
-      versions:
-        - all
 dependencies: []
