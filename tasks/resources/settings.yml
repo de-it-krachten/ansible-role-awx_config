@@ -14,6 +14,5 @@
   become: false
   loop: "{{ awx_settings_all }}"
   loop_control:
-    label:
-      - "name: {{ item }}"
+    label: "name: {{ item }}"
   when: manage_settings | bool
