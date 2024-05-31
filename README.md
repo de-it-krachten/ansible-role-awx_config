@@ -20,7 +20,6 @@ None
 Supported platforms
 
 - OracleLinux 8
-- Ubuntu 24.04 LTS
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
