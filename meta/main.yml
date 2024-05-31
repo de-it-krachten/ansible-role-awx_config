@@ -12,4 +12,7 @@ galaxy_info:
     - name: EL
       versions:
         - '8'
+    - name: Ubuntu
+      versions:
+        - jammy
 dependencies: []

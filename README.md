@@ -13,7 +13,6 @@ AWX configuration (configuration-as-code)
 None
 
 #### Collections
-- community.general
 - awx.awx
 
 ## Platforms
@@ -21,6 +20,7 @@ None
 Supported platforms
 
 - OracleLinux 8
+- Ubuntu 24.04 LTS
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -70,58 +70,45 @@ awx_delete_hosts: false
 - name: sample playbook for role 'awx_config'
   hosts: all
   vars:
-
-    # olam
     olam_admin_username: admin
     olam_admin_password: admin
     olam_disable_ipv6: true
     olam_demo_data: false
-
-    # awx_config
     awx_url: https://localhost
     awx_validate_certs: false
     awx_user: admin
     awx_pass: admin
     awx_manage_roles: false
-    awx_version: "15.0.1"
-
+    awx_version: 15.0.1
     awx_organizations:
       - name: organization1
         short_name: org1
         description: Company organization nr1
         file: org1.yml
-        # galaxy_credentials:
-        #   - Ansible Galaxy
       - name: organization2
         short_name: org2
         description: Company organization nr2
         file: org2.yml
-
     awx_organization_path: molecule/default/tests/data
-
   tasks:
-
     - name: Pause play until a URL is reachable from this host
       uri:
-        url: "{{ awx_url }}"
-        validate_certs: "{{ awx_validate_certs }}"
-        follow_redirects: yes
+        url: '{{ awx_url }}'
+        validate_certs: '{{ awx_validate_certs }}'
+        follow_redirects: 'yes'
         method: GET
       register: _result
       until: _result.status == 200
       retries: 30
       delay: 10
-
     - name: Install awxkit
       pip:
-        name: "awxkit=={{ awx_version }}"
+        name: awxkit=={{ awx_version }}
         executable: pip3
-
     - name: Get Oauth tokeb
       include_role:
         name: awx_config
         tasks_from: login.yml
-
     - name: Include role 'awx_config'
       include_role:
         name: awx_config
