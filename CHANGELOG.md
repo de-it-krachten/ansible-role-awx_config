@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-awx_config/compare/v1.3.0...v1.4.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([cb501ff](https://github.com/de-it-krachten/ansible-role-awx_config/commit/cb501ff60deb99ebe9cf64a056c3d50420ea040c))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-awx_config/compare/v1.2.0...v1.3.0) (2024-06-03)
 
 
