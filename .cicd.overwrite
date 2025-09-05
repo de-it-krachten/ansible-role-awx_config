@@ -6,16 +6,13 @@ generic:
 
 # Supported platforms
 platforms:
-  rhel7:
-    ci: false
-    supported: false
   rhel8:
     ci: false
     supported: false
   rhel9:
     ci: false
     supported: false
-  centos7:
+  rhel10:
     ci: false
     supported: false
   centos8:
@@ -27,6 +24,9 @@ platforms:
   rockylinux9:
     ci: false
     supported: false
+  rockylinux10:
+    ci: false
+    supported: false
   oraclelinux8:
     ci: true
     supported: true
@@ -36,10 +36,16 @@ platforms:
   oraclelinux9:
     ci: false
     supported: false
+  oraclelinux10:
+    ci: false
+    supported: false
   almalinux8:
     ci: false
     supported: false
   almalinux9:
+    ci: false
+    supported: false
+  almalinux10:
     ci: false
     supported: false
   opensuse15:
@@ -57,6 +63,9 @@ platforms:
   debian12:
     ci: false
     supported: false
+  debian13:
+    ci: false
+    supported: false
   ubuntu1804:
     ci: false
     supported: false
@@ -69,10 +78,10 @@ platforms:
   ubuntu2404:
     ci: false
     supported: false
-  fedora40:
+  fedora41:
     ci: false
     supported: false
-  fedora41:
+  fedora42:
     ci: false
     supported: false
   alpine:
