@@ -13,7 +13,7 @@ AWX configuration (configuration-as-code)
 None
 
 #### Collections
-- awx.awx
+- {'name': 'awx.awx'}
 
 ## Platforms
 
@@ -23,6 +23,7 @@ Supported platforms
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
+
 
 ## Role Variables
 ### defaults/main.yml

@@ -7,86 +7,59 @@ generic:
 # Supported platforms
 platforms:
   rhel8:
-    ci: false
     supported: false
+    ci: false
   rhel9:
-    ci: false
     supported: false
+    ci: false
   rhel10:
-    ci: false
     supported: false
-  centos8:
     ci: false
-    supported: false
   rockylinux8:
-    ci: false
     supported: false
+    ci: false
   rockylinux9:
-    ci: false
     supported: false
+    ci: false
   rockylinux10:
-    ci: false
     supported: false
-  oraclelinux8:
-    ci: true
-    supported: true
-    molecule:
-      docker:
-        image: "dropveter/olam:latest"
+    ci: false
   oraclelinux9:
-    ci: false
     supported: false
+    ci: false
   oraclelinux10:
-    ci: false
     supported: false
+    ci: false
   almalinux8:
-    ci: false
     supported: false
+    ci: false
   almalinux9:
-    ci: false
     supported: false
+    ci: false
   almalinux10:
-    ci: false
     supported: false
-  opensuse15:
     ci: false
-    supported: false
-  sles15:
-    ci: false
-    supported: false
-  debian10:
-    ci: false
-    supported: false
   debian11:
-    ci: false
     supported: false
+    ci: false
   debian12:
-    ci: false
     supported: false
+    ci: false
   debian13:
-    ci: false
     supported: false
-  ubuntu1804:
     ci: false
-    supported: false
-  ubuntu2004:
-    ci: false
-    supported: false
   ubuntu2204:
-    ci: false
     supported: false
+    ci: false
   ubuntu2404:
-    ci: false
     supported: false
-  fedora41:
     ci: false
-    supported: false
   fedora42:
-    ci: false
     supported: false
-  alpine:
     ci: false
+  fedora43:
     supported: false
+    ci: false
 
 ci_templates:
   converge.yml:
