@@ -13,7 +13,7 @@ AWX configuration (configuration-as-code)
 None
 
 #### Collections
-- {'name': 'awx.awx'}
+- awx.awx
 
 ## Platforms
 
