@@ -4,19 +4,13 @@
   hosts: all
   vars:
 
-    # olam
-    olam_admin_username: admin
-    olam_admin_password: admin
-    olam_disable_ipv6: true
-    olam_demo_data: false
-
     # awx_config
     awx_url: https://localhost
     awx_validate_certs: false
     awx_user: admin
-    awx_pass: admin
+    awx_pass: 'Admin123!'
     awx_manage_roles: false
-    awx_version: "15.0.1"
+    awx_version: "24.6.1"
 
     awx_organizations:
       - name: organization1
@@ -32,6 +26,9 @@
 
     awx_organization_path: molecule/default/tests/data
 
+  roles:
+    - deitkrachten.awx_cli
+
   tasks:
 
     - name: Pause play until a URL is reachable from this host
@@ -45,12 +42,7 @@
       retries: 30
       delay: 10
 
-    - name: Install awxkit
-      pip:
-        name: "awxkit=={{ awx_version }}"
-        executable: pip3
-
-    - name: Get Oauth tokeb
+    - name: Get Oauth token
       include_role:
         name: ansible-role-awx_config
         tasks_from: login.yml

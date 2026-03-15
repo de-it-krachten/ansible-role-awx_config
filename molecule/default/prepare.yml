@@ -46,6 +46,7 @@
       - opensuse16
 
     systemctl_alternative: False
+    activate_epel: True
   roles:
     - { role: deitkrachten.facts, when: ansible_os_family != 'Windows' }
     - deitkrachten.showinfo
@@ -382,6 +383,8 @@
               - iproute
               - glibc-langpack-en
               - gnupg2
+              - policycoreutils
+              - policycoreutils-python-utils
             state: present
 
         - name: Activate epel repository
