@@ -13,8 +13,8 @@ awx_url: https://localhost
 awx_validate_certs: false
 
 # AWX user + password
-awx_user: awx
-awx_pass: awx
+awx_user: 'admin'
+awx_pass: 'Admin123!'
 
 # List of resources to managed
 awx_manage_demo: true

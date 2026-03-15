@@ -6,87 +6,60 @@ generic:
 
 # Supported platforms
 platforms:
-  rhel8:
-    ci: false
-    supported: false
-  rhel9:
-    ci: false
-    supported: false
-  rhel10:
-    ci: false
-    supported: false
-  centos8:
-    ci: false
-    supported: false
   rockylinux8:
-    ci: false
-    supported: false
-  rockylinux9:
-    ci: false
-    supported: false
-  rockylinux10:
-    ci: false
-    supported: false
-  oraclelinux8:
-    ci: true
     supported: true
-    molecule:
-      docker:
-        image: "dropveter/olam:latest"
+    ci: false
+  rockylinux9:
+    supported: true
+    ci: false
+  rockylinux10:
+    supported: true
+    ci: false
+  oraclelinux8:
+    supported: true
+    ci: false
   oraclelinux9:
+    supported: true
     ci: false
-    supported: false
   oraclelinux10:
+    supported: true
     ci: false
+  olam8:
     supported: false
+    ci: true
   almalinux8:
+    supported: true
     ci: false
-    supported: false
   almalinux9:
+    supported: true
     ci: false
-    supported: false
   almalinux10:
+    supported: true
     ci: false
-    supported: false
-  opensuse15:
-    ci: false
-    supported: false
-  sles15:
-    ci: false
-    supported: false
-  debian10:
-    ci: false
-    supported: false
   debian11:
+    supported: true
     ci: false
-    supported: false
   debian12:
+    supported: true
     ci: false
-    supported: false
   debian13:
+    supported: true
     ci: false
-    supported: false
-  ubuntu1804:
-    ci: false
-    supported: false
   ubuntu2004:
+    supported: true
     ci: false
-    supported: false
   ubuntu2204:
+    supported: true
     ci: false
-    supported: false
   ubuntu2404:
+    supported: true
     ci: false
-    supported: false
-  fedora41:
-    ci: false
-    supported: false
   fedora42:
+    supported: true
     ci: false
-    supported: false
-  alpine:
+  fedora43:
+    supported: true
     ci: false
-    supported: false
 
 ci_templates:
   converge.yml:
@@ -95,5 +68,8 @@ ci_templates:
 molecule:
   requirements:
     roles_extra:
-      - olam
-      - openssl
+      # - deitkrachten.awx_cli
+      - { name: deitkrachten.awx_cli, version: dev }
+  prepare:
+    vars:
+      activate_epel: true
