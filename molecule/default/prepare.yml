@@ -46,6 +46,7 @@
       - opensuse16
 
     systemctl_alternative: False
+    activate_epel: True
   roles:
     - { role: deitkrachten.facts, when: ansible_os_family != 'Windows' }
     - deitkrachten.showinfo

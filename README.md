@@ -19,7 +19,26 @@ None
 
 Supported platforms
 
-- OracleLinux 8
+- Red Hat Enterprise Linux 8<sup>1</sup>
+- Red Hat Enterprise Linux 9<sup>1</sup>
+- Red Hat Enterprise Linux 10<sup>1</sup>
+- RockyLinux 8<sup>1</sup>
+- RockyLinux 9<sup>1</sup>
+- RockyLinux 10<sup>1</sup>
+- OracleLinux 8<sup>1</sup>
+- OracleLinux 9<sup>1</sup>
+- OracleLinux 10<sup>1</sup>
+- AlmaLinux 8<sup>1</sup>
+- AlmaLinux 9<sup>1</sup>
+- AlmaLinux 10<sup>1</sup>
+- Debian 11 (Bullseye)<sup>1</sup>
+- Debian 12 (Bookworm)<sup>1</sup>
+- Debian 13 (Trixie)<sup>1</sup>
+- Ubuntu 20.04 LTS<sup>1</sup>
+- Ubuntu 22.04 LTS<sup>1</sup>
+- Ubuntu 24.04 LTS<sup>1</sup>
+- Fedora 42<sup>1</sup>
+- Fedora 43<sup>1</sup>
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -41,8 +60,8 @@ awx_url: https://localhost
 awx_validate_certs: false
 
 # AWX user + password
-awx_user: awx
-awx_pass: awx
+awx_user: 'admin'
+awx_pass: 'Admin123!'
 
 # List of resources to managed
 awx_manage_demo: true
@@ -70,16 +89,12 @@ awx_delete_hosts: false
 - name: sample playbook for role 'awx_config'
   hosts: all
   vars:
-    olam_admin_username: admin
-    olam_admin_password: admin
-    olam_disable_ipv6: true
-    olam_demo_data: false
     awx_url: https://localhost
     awx_validate_certs: false
     awx_user: admin
-    awx_pass: admin
+    awx_pass: Admin123!
     awx_manage_roles: false
-    awx_version: 15.0.1
+    awx_version: 24.6.1
     awx_organizations:
       - name: organization1
         short_name: org1
@@ -90,6 +105,8 @@ awx_delete_hosts: false
         description: Company organization nr2
         file: org2.yml
     awx_organization_path: molecule/default/tests/data
+  roles:
+    - deitkrachten.awx_cli
   tasks:
     - name: Pause play until a URL is reachable from this host
       uri:
@@ -101,11 +118,7 @@ awx_delete_hosts: false
       until: _result.status == 200
       retries: 30
       delay: 10
-    - name: Install awxkit
-      pip:
-        name: awxkit=={{ awx_version }}
-        executable: pip3
-    - name: Get Oauth tokeb
+    - name: Get Oauth token
       include_role:
         name: awx_config
         tasks_from: login.yml

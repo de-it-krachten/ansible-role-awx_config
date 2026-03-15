@@ -50,13 +50,9 @@ roles:
     src: https://github.com/de-it-krachten/ansible-role-unbound
     version: main
     scm: git
-  - name: olam
-    src: https://github.com/de-it-krachten/ansible-role-olam
-    version: main
-    scm: git
-  - name: openssl
-    src: https://github.com/de-it-krachten/ansible-role-openssl
-    version: main
+  - name: deitkrachten.awx_cli
+    src: https://github.com/de-it-krachten/ansible-role-awx_cli
+    version: dev
     scm: git
 
 collections: []

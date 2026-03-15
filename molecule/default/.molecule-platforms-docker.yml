@@ -97,7 +97,7 @@
   volumes:
     - /sys/fs/cgroup:/sys/fs/cgroup:rw
 - name: oraclelinux8
-  ci: true
+  ci: false
   image: docker.io/dropveter/oraclelinux8-ansible
   privileged: true
   pre_build_image: true

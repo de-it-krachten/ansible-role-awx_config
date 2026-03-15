@@ -6,62 +6,59 @@ generic:
 
 # Supported platforms
 platforms:
-  rhel8:
-    supported: false
-    ci: false
-  rhel9:
-    supported: false
-    ci: false
-  rhel10:
-    supported: false
-    ci: false
   rockylinux8:
-    supported: false
+    supported: true
     ci: false
   rockylinux9:
-    supported: false
+    supported: true
     ci: false
   rockylinux10:
-    supported: false
+    supported: true
+    ci: false
+  oraclelinux8:
+    supported: true
     ci: false
   oraclelinux9:
-    supported: false
+    supported: true
     ci: false
   oraclelinux10:
-    supported: false
+    supported: true
     ci: false
   olam8:
     supported: false
     ci: true
   almalinux8:
-    supported: false
+    supported: true
     ci: false
   almalinux9:
-    supported: false
+    supported: true
     ci: false
   almalinux10:
-    supported: false
+    supported: true
     ci: false
   debian11:
-    supported: false
+    supported: true
     ci: false
   debian12:
-    supported: false
+    supported: true
     ci: false
   debian13:
-    supported: false
+    supported: true
+    ci: false
+  ubuntu2004:
+    supported: true
     ci: false
   ubuntu2204:
-    supported: false
+    supported: true
     ci: false
   ubuntu2404:
-    supported: false
+    supported: true
     ci: false
   fedora42:
-    supported: false
+    supported: true
     ci: false
   fedora43:
-    supported: false
+    supported: true
     ci: false
 
 ci_templates:
@@ -71,5 +68,8 @@ ci_templates:
 molecule:
   requirements:
     roles_extra:
-      - olam
-      - openssl
+      # - deitkrachten.awx_cli
+      - { name: deitkrachten.awx_cli, version: dev }
+  prepare:
+    vars:
+      activate_epel: true
