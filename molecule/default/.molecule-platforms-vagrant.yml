@@ -44,6 +44,8 @@
   ci: false
   box: generic/oracle10
   interfaces: [{'network_name': 'private_network', 'type': 'dhcp', 'auto_config': True}]
+- name: olam8
+  ci: true
 - name: almalinux8
   ci: false
   box: generic/alma8

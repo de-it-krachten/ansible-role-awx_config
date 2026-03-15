@@ -30,6 +30,9 @@ platforms:
   oraclelinux10:
     supported: false
     ci: false
+  olam8:
+    supported: false
+    ci: true
   almalinux8:
     supported: false
     ci: false
