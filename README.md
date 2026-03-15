@@ -19,7 +19,26 @@ None
 
 Supported platforms
 
-- OracleLinux 8
+- Red Hat Enterprise Linux 8<sup>1</sup>
+- Red Hat Enterprise Linux 9<sup>1</sup>
+- Red Hat Enterprise Linux 10<sup>1</sup>
+- RockyLinux 8<sup>1</sup>
+- RockyLinux 9<sup>1</sup>
+- RockyLinux 10<sup>1</sup>
+- OracleLinux 8<sup>1</sup>
+- OracleLinux 9<sup>1</sup>
+- OracleLinux 10<sup>1</sup>
+- AlmaLinux 8<sup>1</sup>
+- AlmaLinux 9<sup>1</sup>
+- AlmaLinux 10<sup>1</sup>
+- Debian 11 (Bullseye)<sup>1</sup>
+- Debian 12 (Bookworm)<sup>1</sup>
+- Debian 13 (Trixie)<sup>1</sup>
+- Ubuntu 20.04 LTS<sup>1</sup>
+- Ubuntu 22.04 LTS<sup>1</sup>
+- Ubuntu 24.04 LTS<sup>1</sup>
+- Fedora 42<sup>1</sup>
+- Fedora 43<sup>1</sup>
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms

@@ -47,7 +47,7 @@
   ci: false
   image: docker.io/geerlingguy/docker-rockylinux10-ansible:latest
 - name: oraclelinux8
-  ci: true
+  ci: false
   image: docker.io/dropveter/oraclelinux8-ansible
 - name: oraclelinux9
   ci: false
