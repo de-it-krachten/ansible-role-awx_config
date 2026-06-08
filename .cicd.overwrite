@@ -79,6 +79,7 @@ ci_templates:
 
 # Molecule
 molecule:
+  phase1: []
   requirements:
     roles_extra:
       - deitkrachten.awx_cli
