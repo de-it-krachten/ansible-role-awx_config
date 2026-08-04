@@ -52,7 +52,7 @@ roles:
     scm: git
   - name: deitkrachten.awx_cli
     src: https://github.com/de-it-krachten/ansible-role-awx_cli
-    version: dev
+    version: main
     scm: git
 
 collections: []

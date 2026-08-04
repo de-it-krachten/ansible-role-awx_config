@@ -1,5 +1,6 @@
 ---
 
+# Generic
 generic:
   role_description: |
     AWX configuration (configuration-as-code)
@@ -54,22 +55,34 @@ platforms:
   ubuntu2404:
     supported: true
     ci: false
-  fedora42:
+  ubuntu2604:
     supported: true
     ci: false
   fedora43:
     supported: true
     ci: false
+  fedora44:
+    supported: true
+    ci: false
 
+# Dependencies 
+dependencies:
+  roles: 
+    - deitkrachten.awx_cli
+  collections:
+    - awx.awx
+
+# CI templates
 ci_templates:
   converge.yml:
     force: false
 
+# Molecule
 molecule:
+  phase1: []
   requirements:
     roles_extra:
-      # - deitkrachten.awx_cli
-      - { name: deitkrachten.awx_cli, version: dev }
+      - deitkrachten.awx_cli
   prepare:
     vars:
       activate_epel: true
