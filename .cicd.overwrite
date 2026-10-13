@@ -37,9 +37,6 @@ platforms:
   almalinux10:
     supported: true
     ci: false
-  debian11:
-    supported: true
-    ci: false
   debian12:
     supported: true
     ci: false
